@@ -1,4 +1,4 @@
-# Build your own mini-Strava
+# Couse outline: Build your own mini-Strava
 
 This course is aimed at beginner and intermediate React developers interested in using interactive maps and data visualisations in their applications. Students will build a mini-clone of Strava - cycling/running route directory with map and elevation profile. 
 
@@ -48,7 +48,7 @@ When using global CSS selectors name clashing is very common. We will explain ho
 ### Data source
 Before starting to build our api we’ll define data shape first using TypeScript. Thinking about types first is a good planning exercise for students. It makes us realize potential issues earlier and provides autocomplete, which simplifies working with data in our editor. 
 
-### Building an actual backend is out of scope of this course, so we’ll use Promises to simulate asynchronous data fetching. We could also add a setTimeout to simulate loading state.
+Building an actual backend is out of scope of this course, so we’ll use Promises to simulate asynchronous data fetching. We could also add a setTimeout to simulate loading state.
 
 At this point we want to decide which api endpoints we will build and where we will call them. Let’s use the sketch we’ve built to discuss. It’s tempting to just define a single getRoutes endpoint and fetch everything at once, but will this approach scale? If we add a bunch of complex routes we might easily be looking at megabytes of data. A more future-proof solution would be to only fetch what we need, when we need it.
 
