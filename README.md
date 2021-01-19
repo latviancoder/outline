@@ -1,4 +1,4 @@
-# Couse outline: Build your own mini-Strava
+# Course outline: Build your own mini-Strava
 
 This course is aimed at beginner and intermediate React developers interested in using interactive maps and data visualisations in their applications. Students will build a mini-clone of Strava/Komoot - cycling/running route directory with map and elevation profile. 
 
