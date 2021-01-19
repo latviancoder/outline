@@ -1,6 +1,6 @@
 # Couse outline: Build your own mini-Strava
 
-This course is aimed at beginner and intermediate React developers interested in using interactive maps and data visualisations in their applications. Students will build a mini-clone of Strava - cycling/running route directory with map and elevation profile. 
+This course is aimed at beginner and intermediate React developers interested in using interactive maps and data visualisations in their applications. Students will build a mini-clone of Strava/Komoot - cycling/running route directory with map and elevation profile. 
 
 TypeScript is going to become an important topic throughout this course. Having autocomplete and static error checking inside the editor is much nicer than cryptic “undefined is not a function” in browser console. For npm libraries we’ll use types almost as documentation at our fingertips. 
 
