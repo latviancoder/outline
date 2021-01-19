@@ -135,7 +135,8 @@ Now we have two options. We can either manually paint axes with React and foreig
 To give D3 DOM access we’ll use refs and wait till React renders everything to screen, then call axis helpers inside useEffect.
 
 ## Module 4: Adding interactive position indicator to elevation profile
-- Using D3 invert and bisect 
+- Attaching events to SVG elements
+- Using D3 invert and bisect to calculate exact geo coordinates from mouse position 
 - Using foreignObject to include HTML in SVG
 - Using context to avoid prop drilling
 
@@ -150,12 +151,20 @@ Both Map and ElevationProfile components will need to communicate indicator posi
 ### Displaying indicator
 Now we can create the indicator itself. We can either do it using svg elements like rect, text and tspan or utilize foreignObject which allows us to include regular html elements. The cool thing is no matter which approach we’ll use we’ll still get autoscaling on smaller resolutions out of the box.
 
+### Using context to avoid prop drilling
+We can notice in the Details component that we are repeatedly passing down the same props down the tree, sometimes even a couple levels deep. This is called prop drilling and can be fixed by using context. At this point we could also mention that prop drilling is why context was introduced to React in the first place, not to replace redux.
+
 ## Module 5: Adding interactive position indicator to map
 
-Now we need the opposite of what we did in the previous module - we want moving over the route on the map to display position indicator on the elevation profile. The first solution that comes to mind is to simply attach mousemove event to the leaflet Polyline. That won’t work as expected. What we actually need is to show the indicator when we are “within certain pixel distance from the route”.
+- Attaching events to Leaflet Polyline and Map
+- Use sphere-knn to do fast nearest-neighbor lookups on a sphere
+- Calculating pixel distance between points on the map
+- Use React Devtools Profiler to find and fix rendering performance issues
 
-To achieve that we’ll need to instead attach mousemove event to the whole map, calculate distance between route and mouse position and show indicator if it’s near enough. Essentially our route is a collection of geographic points and we want to check which one of these points is near a given latitude/longitude pair. There are several npm libraries which can help us do that.
+Now we need the opposite of what we did in the previous module - we want moving over the route on the map to display position indicator on the elevation profile. The first solution that comes to mind is to simply attach mousemove event to the leaflet Polyline. That won’t work as expected. Firstly it won’t fire reliably, secondly what we actually need is to show the indicator when we are “within certain pixel distance from the route”.
 
-Calculating the closest point on polyline on map mousemove
-Only show position marker when cursor if within certain pixel distance from the route
-Use React Devtools Profiler to find and fix rendering performance issues
+To achieve that we’ll need to instead attach mousemove event to the whole map, calculate distance between route and mouse position and show indicator if it’s near enough. Essentially our route is a collection of geographic points and we want to check which one of these points is near a given latitude/longitude pair. There are several npm libraries which can help us do that, for example sphere-knn.
+
+We’ll use the library to determine the closest polyline point on mousemove, then calculate pixel distance between the mouse cursor and that point and if the distance is small enough – update indicator position. And by hiding the indicator in case the distance is too long we’ll finally be able to achieve desired functionality.
+ 
+Our application seems to be quite performant, but what about weaker devices? Up until recently I was using 4gb 2013 Macbook Air and modern web was quite a different experience. By using throttling in Chrome performance panel we can simulate weaker CPUs and then use React Devtools Profiler to find performance bottlenecks and fix them.
